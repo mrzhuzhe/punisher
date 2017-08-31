@@ -1,0 +1,21 @@
+{
+  "name": "punisher",
+  "version": "0.0.1",
+  "description": "zz's sitecrawler",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "punisher": "node index.js"
+  },
+  "keywords": [
+    "crawler"
+  ],
+  "author": "zhe.zhu",
+  "license": "MIT",
+  "dependencies": {
+    "crawler": "^1.0.5"
+  },
+  "devDependencies": {
+    "webpack": "^3.5.5"
+  }
+}
