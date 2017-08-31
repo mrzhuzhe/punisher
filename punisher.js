@@ -19,6 +19,10 @@ var _config = {
 
 // go
 var _visitPage = function (curPage, callback) {
+    // TODO find this error
+    if (!curPage) {
+        return
+    }
     _pagesVisited[curPage]= true;
     _visited_pages_count++;
     //  TODO this should be simple line
@@ -43,7 +47,7 @@ var _visitPage = function (curPage, callback) {
                 if (res.$) {                    
                     var $ = res.$;
                     // scan data
-                    _config._scanCurPage(curPage, $);
+                    _config._scanCurPage(curPage, _visited_pages_count , $);
                     // get links within page
                     var _links = $("a");
                     _links.each(function(i, e){

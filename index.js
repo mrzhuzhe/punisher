@@ -4,7 +4,7 @@ var { _getLocation } = require('./utils');
 
 //  config; TODO add an error handle
 let _config = {
-    _max_pages_to_visit : 100,
+    _max_pages_to_visit : 1000,
     //  judge Url if it shold be visit TODO Judge Rules should be Modify
     /* TODO
        nowaday i just just full location as filter it is too simple and will miss too much 
@@ -14,16 +14,16 @@ let _config = {
         return !!_getLocation(href) && ( _getLocation(href).domain == _getLocation(curPage).domain )
     },
     //  scan curpage TODO scan stage should be modify
-    _scanCurPage  (href, $) {
+    _scanCurPage  (href, count , $) {
         var title = $("title").html();
         // save curpage info
         this._saveToDataBase({
-            href, title
+            href, count, title
         });
     },
     // save
     _saveToDataBase (data) {
-        fs.appendFileSync('result.txt', data.title + '\n' + data.href + '\n');
+        fs.appendFileSync('result.txt', data.count + " " + data.title + ' ' +  data.href + ' \n');
     },
     _schedules: [] 
 }
@@ -32,9 +32,14 @@ let _config = {
 //start page
 _config._schedules.push('http://www.jd.com');
 
-// run
-punisher._init(_config);
-
+let _app = {
+    run () {
+        fs.unlinkSync('result.txt')
+        // run
+        punisher._init(_config);
+    }
+}
+_app.run();
 
 
 
