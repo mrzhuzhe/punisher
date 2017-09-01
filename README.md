@@ -6,7 +6,7 @@ a simple js web crawler
 1. npm i
 ```
 
-2. modify index.js
+2. modify `index.js`
 change start pge
 ```
 //start page
