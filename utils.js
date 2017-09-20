@@ -6,7 +6,7 @@ const _getLocation = (url) => {
             host: _location[0],
             protocol: _location[1],
             domain: _location[2],
-            main: _location[0].match(/([^\.\/]+)\.(com|cn|net|me|c|org)/)[0]
+            main: _location[0].match(/([^\.\/]+)\.(com|cn|net|me|c|org|tt)/)[0]
         }
     } else {
         return null
