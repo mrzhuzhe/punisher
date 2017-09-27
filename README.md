@@ -23,21 +23,17 @@ _config._schedules = _config._schedules.concat(_send);
 ## options
 in `./index.js`
 ```
-//  config; TODO add an error handle
+//  config your crawler Strategy here
 let _config = {
     _resultData: [],
-    _max_pages_to_visit : 1000,
-    //  judge Url if it shold be visit TODO Judge Rules should be Modify
-    /* TODO
-       nowaday i just just full location as filter it is too simple and will miss too much
-        i should improve this for get most imfomation page
-     */
-    _urlfilter (curPage, href) {
-        //console.log(href)
+    // the max limit of crawler to request
+    _max_pages_to_visit : 1000,
+    //  judge Url if it shold be visit insofar return true
+    _urlfilter (curPage, href) {       
         //return !!_getLocation(href) && ( _getLocation(href).main == _getLocation(curPage).main )
         return href.match(/^http[s]*\:\/\/antirez.com\/news\/(\d+)$/);
     },
-    //  scan curpage TODO scan stage should be modify
+    //  scan curpage and gather infomation 
     _scanCurPage  (href, count , $) {
         var title = $("#newslist h2").text();
         var content = $("#content .comment pre").text();
@@ -54,6 +50,7 @@ let _config = {
             author
         });
     },
+    // change the data object format
     _addToResult (data) {
         var _format = {
             "count": data.count,
