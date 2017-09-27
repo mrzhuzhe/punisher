@@ -9,18 +9,20 @@ var _visited_pages_count = 0;
 var _config = {
     _max_pages_to_visit : 1000,
     _urlfilter () {
-        return true 
+        return true
     },
     _scanCurPage  () {
-       
+
     },
-    _schedules: [] 
+    _schedules: []
 }
 
 // go
 var _visitPage = function (curPage, callback) {
     // TODO find this error
     if (!curPage) {
+        let msg = "run out of schedules";
+        _config._onFinish({ msg });
         return
     }
     _pagesVisited[curPage]= true;
@@ -42,26 +44,27 @@ var _visitPage = function (curPage, callback) {
             if (error) {
                 console.log(error);
                 console.log(curPage);
-                //  TODO Store and Handler error info
+                //  Store and Handler error info
+                _config._onError({ error , curPage });
             } else {
-                if (res.$) {                    
+                if (res.$) {
                     var $ = res.$;
                     // scan data
                     _config._scanCurPage(curPage, _visited_pages_count , $);
                     // get links within page
                     var _links = $("a");
                     _links.each(function(i, e){
-                        var href = $(e).attr("href");                      
-                        if (href) {                            
+                        var href = $(e).attr("href");
+                        if (href) {
                             //add to schedules
                             href = _convertToFullUrl(curPage, href);
-                            //judge if it should be 
+                            //judge if it should be
                             if (!!_config._urlfilter(curPage, href)) {
-                                _pagesToVisit.push(href);                                
-                            }                                                          
-                        }                        
+                                _pagesToVisit.push(href);
+                            }
+                        }
                     });
-                }                
+                }
             }
             // next
             callback();
@@ -76,7 +79,8 @@ var _visitPage = function (curPage, callback) {
 var _crawl = function () {
     //  judge by limited
     if(_visited_pages_count >= _config._max_pages_to_visit) {
-        console.log("Reached max limit of number of pages to visit.");
+        let msg = "Reached max limit of number of pages to visit.";
+        _config._onFinish({ msg });
         return;
     }
     // TODO judge by deep
@@ -94,7 +98,7 @@ var _crawl = function () {
 
 //  convert relative path or without protocol to full domain
 var _convertToFullUrl = function (curPage, href) {
-    var _location = _getLocation(curPage); 
+    var _location = _getLocation(curPage);
     var _host = _location.host, _protocol = _location.protocol;
     // whent time out href
     href = href
@@ -103,11 +107,11 @@ var _convertToFullUrl = function (curPage, href) {
         return _host + arguments[0].replace(/^(?!\/)/, '/');
     })
     //if without protocol
-    .replace(/^\/\//, _protocol);   
+    .replace(/^\/\//, _protocol);
     return href
 }
 
-var _init = function (options) { 
+var _init = function (options) {
     _config = Object.assign(_config, options);
     let _startPage = _config._schedules;
     _pagesToVisit = _pagesToVisit.concat(_startPage);
