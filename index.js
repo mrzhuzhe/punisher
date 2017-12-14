@@ -2,12 +2,21 @@ var fs = require('fs');
 var punisher = require('./punisher');
 var { _getLocation } = require('./utils');
 
+const http = require('http');
+http.createServer(function (req, res) {
+  // server code
+  console.log(`${req.method} ${req.url}`);
+  res.end('hello world!');
+}).listen(9000);
+
+
 //Store Data in Memory
 
 //  config; TODO add an error handle
 let _config = {
     _resultData: [],
-    _max_pages_to_visit : 1000,
+    _outputFile: 'result/result.json',
+    _max_pages_to_visit : 10,
     //  judge Url if it shold be visit TODO Judge Rules should be Modify
     /* TODO
        nowaday i just just full location as filter it is too simple and will miss too much
@@ -61,7 +70,7 @@ let _config = {
     // save
     _saveToDataBase (data) {
         let _formatedData = JSON.stringify(data);
-        fs.appendFileSync('result.txt', _formatedData);
+        fs.appendFileSync(this._outputFile, _formatedData);
         //fs.appendFileSync('result.txt', _format);
     },
     _schedules: []
@@ -76,7 +85,9 @@ _config._schedules = _config._schedules.concat(_send);
 
 let _app = {
     run () {
-        fs.unlinkSync('result.txt')
+        fs.open(_config._outputFile, 'w', (err, fd) => {
+            console.log(err, fd)
+        });        
         console.time("start")
         // run
         punisher._init(_config);

@@ -7,7 +7,7 @@ var _pagesVisited = {};
 var _visited_pages_count = 0;
 // defalt setting
 var _config = {
-    _max_pages_to_visit : 1000,
+    _max_pages_to_visit : 10,
     _urlfilter () {
         return true
     },
