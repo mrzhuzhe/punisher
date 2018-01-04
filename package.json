@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "punisher": "node index.js"
+    "punisher": "node index.js",
+    "test1": "node pagination/index.js"
   },
   "keywords": [
     "crawler"

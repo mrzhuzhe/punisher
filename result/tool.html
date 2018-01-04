@@ -34,8 +34,9 @@
         reader.onload = (e) => {
         	let _data = e.target.result
         	_data = JSON.parse(_data)
+            _data = JSON.parse(_data)
         	let _html = '';
-        	_data.forEach(e => {
+        	_data.data.poiList.forEach(e => {
         		for (key in e) {
         			_html += '<p>' + key + ':  ' + e[key] + '</p>'
         		}
