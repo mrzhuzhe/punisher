@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>result</title>
+    <style type="text/css">
+        .main {
+            color: #555;
+            font-size: 14px;
+            .in, .out {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <h1>A simple tool for show result</h1>
+        <h2>1.Via file reader</h2>
+        <div class="in">
+            <input type="file" onchange="handleFileSelect(this.files)">
+        </div>
+        <div class="out">
+            <output id="list"></output>
+        </div>
+
+
+    </div>
+
+    <script type="text/javascript">
+      function handleFileSelect(FileList) {
+        var _file = FileList[0];
+       	let _list = document.getElementById('list')
+        let reader = new FileReader();
+        reader.onload = (e) => {
+        	let _data = e.target.result
+        	_data = JSON.parse(_data)
+        	let _html = '';
+        	_data.forEach(e => {
+        		for (key in e) {
+        			_html += '<p>' + key + ':  ' + e[key] + '</p>'
+        		}
+        		_html += '<hr>'
+        	})
+        	_list.innerHTML = _html
+        }
+        // Read in the image file as a binary string.
+        reader.readAsText(_file);
+      }
+    </script>
+
+</body>
+</html>
