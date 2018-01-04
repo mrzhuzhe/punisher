@@ -10,7 +10,7 @@ var _app = {
         var c = new Crawler({
             maxConnections : 10,
             rateLimit: 1000,
-            proxy: 'http://10.12.50.103:5389',
+            //  proxy: 'http://10.12.50.103:5389',
             callback : function (error, res, done) {
                 let curPage = res.options.uri;
                 if (error) {
@@ -64,8 +64,8 @@ var _app = {
         fs.open(_config._outputFile, 'w', (err, fd) => {
             console.log(err, fd)
         });
-        this._init('http://waimai.meituan.com/ajax/poilist?_token=eJxNklFzojAUhf8LrzCSBEjAmX2gUNQq1WK1yk4fUECBIghBZHf2v2+CQ3cZZvjm3JOT3Bt+C9UsFMYQsIdIwi2qhLEAR2CEBUmgNatoUANEA5qOMDMc/9OwoWCsSsKh2trC+CdEOpAUgD654jHhoegAfEoPJED9lJDKXu6ZMYtwprQcy3IbJHmQjPIooU1wGR2LXD4XeSS3tDXgNY6rDiN2IO6uub1tR6eiOH1FzDpKS1lggfk7D9R1CSlYZWadbaRoPQFGKmRECCNkcOJV2JPCCQ0E8IMg6VMe9E8j36QPRNA3GQPpA+lAGwgOa3X0SCa83McgwNf0KuyDlB4RR/CNjy0B5si7wYbBUOOxmHUGicoNWONhKg/DvbdHdmUceSOqwg0aT1DYbfRNsfllfH7sG/RzZEOUoAGlxYzX6FBz2e/B1tXJ6cIoerm/pkfatKn55sWi4/n77MlKQJaG4fl5/pVUh4Tui9oF6mQZ+2A1yYJbhcvMKpFxb0O8xy74NUnI5lZa/rtnXrdoccpdJy7CJfxYAGcZhOfikEbuZONU9N7tQeCBYG3fymkSxvCykDMryuZdYlPPedZ89+BVndVV7tOH3bV5ssvoa2qmXjH3TksFd93LKdrKFHhyslKJ7ebhMZha80nabFfmcuWvMxFM0MInW11cqLumu91j37qi8mqYxs2Wd3U9vR+ymbn5iJsulS+6CtfN7urWUHQ6hdogE49kKjr7570hmm/O3b/UP4Q/fwGDKOTJ')
-        //'eJxNkl9volAQxb8LrxCZe7n8uSb7QKGoVarF1iqbPqCAAkUQUKSb/e57L80uS0j45cyZM5MJv4RqFgpjBOzRJeEWVcJYQCMYaYIkNDWrqEgFXQXVwBozHP7TENGYKAn7amML458IGyApgD+44jHhWzEAPqRv1IF8SJiwl3tmzCKcmqYcy3IbJHmQjPIoaa7BeXQocvlU5JHcNi1FlziuOg2zhbi75va2HR2L4vgZMesoLWWBBeavPBArmoR0RJkbK+qAZEBgiIEjJv8QcS9GDBHlCVjhaCCOKkfV4MgTkMJR6VVEGRK+G4Ie9R55Lum9oEiIEhhQGXAwqIOq9rnA1qHadxubRvV+BMIMaa8iXcKA+jZdZQj9YFXjBoMjIRxJv686IOLYj8A6R61HPpj262DgYZgfNOMHZd9gOCxF0mLGa83fmsv+F9ZXJ8czo+jp/pwemmubmi9eLDqev8serASyNAxPj/PPpNonza6oXSCTZezDapIFt0orM6vE9N6G2k5z4WuS6G+30vJfPfOywYtj7jpxES7R+wKcZRCein0auZM3p2ru3Q4CD4K1fSunSRij80LOrCibd4ndeM6j6rt7r+qsrnIf3u2uzZNt1jynZuoVc++4VLSuezpGG7kBT05WRLfdPDwEU2s+Sa+blblc+etMhAle+PrGEBdke+1u99i3Lri8UJPebHlb19P7PpuZb+/xtUvls0HQ+rq9uDUSnU5pbMjEgz4Vnd3jjormi3P3z/UP4fcf2XTnkA==')
+        this._init('http://waimai.meituan.com/ajax/poilist?_token='+
+        'eJx1kluP2jAQhf+LX7HA40vsIK0qLoVlw4blTlXxECBLAiRQCGRD1f9e27RNH9ooUj6Pj8+Mj/IdnXsbVAeiH4nRLTyjOoIqqToIo+yidwQIIl1KlGIco/VfNe4wl7sYrc6zNqp/BaoIpkwtTWWkC4+KImSJHygJX2LK9Ws0PS1BUZad6rVaHsRJEFeTMM6uQVpdH5NadEzCWp7lbBNmYpfeEj3Q/9WfLllQPAHSxsnEGINkWAqp9CnKuUZukDlSI6EauVJYcmGqQgmN1FzZEXpMTohBVzswaarUcc0xYVGVKP+JokRq0DoI6yAtWoFrETQCsUMaXwCLRgDMorkFcIvEoPVljkFrxkwLsNek1sH6UlGiOUZtC3BKZCWWAiJLFA/Uge5NoPob2GBNFiAY7vesjGPQibR7M5MuSAyKP7aYnhckeSyEBAzsj07nDYL+WlFQGFzXCHWT7HezV/0j6t1LvE01hS8f/m5NvLxoDCO/cmjymliNVefZ8dP5Ok9o4F2dl2/Dt5Rk25H3JWf5e4MN7u3USyqTZjHyh/Nmg/DTfTcaXruztCM6/Oxnm6LxBs/bvTdqBIUUGzofyOIuBl7PZbRfeBevHYVrfrxea87+7rvThruJxsPmXjpn53MzmRzkYjT2+oKF6Wv8LtyP/q5dHC6L1nrBWRz1u8NbfBzstq1VazqfnvzBodLtZtcFi+JpfHxCP34CYPbfOA==')
     }
 }
 _app._run()
